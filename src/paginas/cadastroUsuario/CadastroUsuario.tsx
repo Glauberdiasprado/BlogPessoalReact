@@ -6,28 +6,30 @@ import { Link, useNavigate } from "react-router-dom";
 import User from "../../models/User";
 
 function CadastroUsuario() {
-  let navigate = useNavigate();
-  const [confirmarSenha, setConfirmarSenha] = useState<String>("");
+  let navigate = useNavigate()
+
+  const [confirmarSenha, setConfirmarSenha] = useState<String>("")
+
   const [user, setUser] = useState<User>({
     id: 0,
     nome: "",
     usuario: "",
     senha: "",
-    
-  });
+
+  })
   const [userResult, setUserResult] = useState<User>({
     id: 0,
     nome: "",
     usuario: "",
     senha: "",
-  
-  });
+
+  })
 
   useEffect(() => {
     if (userResult.id != 0) {
       navigate("/login");
     }
-  }, [userResult]);
+  }, [userResult])
 
   function confirmarSenhaHandle(e: ChangeEvent<HTMLInputElement>) {
     setConfirmarSenha(e.target.value);
@@ -37,19 +39,17 @@ function CadastroUsuario() {
     setUser({
       ...user,
       [e.target.name]: e.target.value,
-    });
+    })
   }
 
   async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (confirmarSenha == user.senha) {
-      cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult);
-      alert("Usuario cadastrado com sucesso");
-    } else {
-      alert(
-        "Dados inconsistentes. Favor verificar as informações de cadastro."
-      );
-    }
+    e.preventDefault()
+    if(confirmarSenha == user.senha){
+      cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult)
+     alert('Usuario cadastrado com sucesso.')
+      }else{
+         alert('Dados inconsistentes. Favor verificar as informações de cadastro.')
+      }
   }
 
   return (
@@ -112,25 +112,15 @@ function CadastroUsuario() {
               margin="normal"
               fullWidth
             />
-            <Box textAlign="center">
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                className="btnCadastrar"
-              >
-                Cadastrar
-              </Button>
-
-              <Link to={"/login"} className="text-decorator-none">
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  className="btnCancelar"
-                >
+            <Box marginTop={2} textAlign='center'>
+              <Link to='/login' className='text-decorator-none'>
+                <Button variant='contained' color='secondary' className='btnCancelar'>
                   Cancelar
                 </Button>
               </Link>
+              <Button type='submit' variant='contained' color='primary'>
+                Cadastrar
+              </Button>
             </Box>
           </form>
         </Box>
