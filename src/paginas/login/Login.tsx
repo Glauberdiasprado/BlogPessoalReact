@@ -1,8 +1,8 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import { Grid, Box, Typography, TextField, Button } from '@material-ui/core';
+import { Grid, Box, Typography, TextField, Button }from "@mui/material";
 import { Link, useNavigate } from 'react-router-dom';
 import useLocalStorage from 'react-use-localstorage';
-import { login } from '../../services/Service';
+import { logar } from '../../services/Service';
 import UserLogin from '../../models/UserLogin';
 import './Login.css'
 
@@ -26,15 +26,15 @@ function Login() {
         }
 
             useEffect(()=>{
-                if(token != ''){
+                if(token !== ''){
                     navigate("/home")
                 }
-            }, [token])
+            }, [navigate, token])
 
         async function onSubmit(e: ChangeEvent<HTMLFormElement>){
             e.preventDefault();
             try{
-                await login(`/usuarios/logar`, userLogin, setToken)
+                await logar(`/usuarios/logar`, userLogin, setToken)
 
                 alert('Usuário logado com sucesso!');
             }catch(error){

@@ -1,37 +1,38 @@
-import React, { useEffect, useState } from 'react'
-import { Box, Button, Card, CardActions, CardContent, Typography } from '@material-ui/core'
-import { Link, useNavigate } from 'react-router-dom'
-import Tema from '../../../models/Tema'
-import './ListaTema.css'
-import useLocalStorage from 'react-use-localstorage'
-import { busca } from '../../../services/Service'
-
+import React, {useState, useEffect} from 'react'
+import { Link } from 'react-router-dom'
+import { Box, Card, CardActions, CardContent, Button, Typography } from "@mui/material";
+import Tema from '../../../models/Tema';
+import './ListaTema.css';
+import useLocalStorage from 'react-use-localstorage';
+import {useNavigate} from 'react-router-dom';
+import { busca } from '../../../services/Service';
 
 function ListaTema() {
   const [temas, setTemas] = useState<Tema[]>([])
-  const [token, setToken] = useLocalStorage('token')
-  let history = useNavigate()
+  const [token, setToken] = useLocalStorage('token');
+  let navigate = useNavigate();  //tem que ser autenticado (Token)
 
   useEffect(()=>{
-    if (token == ''){
-      alert("Você precisar estar logado!")
-      history("/login")
-
+    if(token == ''){
+      alert("Você precisa estar logado") 
+      navigate("/login")
     }
   }, [token])
 
-  async function getTema(){
-    await busca("/temas", setTemas,{
+
+  async function getTemas(){   //requisição dos temas pela api
+    await busca("/temas", setTemas, {
       headers: {
-        'Authorization': token
+        'Authorization': token //propiedade que recebe o token, passa no header
       }
     })
   }
 
 
-  useEffect(()=>{
-    getTema()
+  useEffect(()=>{  //chamar a função do get
+    getTemas()
   }, [temas.length])
+
 
   return (
     <>

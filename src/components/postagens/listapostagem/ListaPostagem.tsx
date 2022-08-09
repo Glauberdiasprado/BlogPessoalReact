@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Postagem from '../../../models/Postagem';
 import { busca } from '../../../services/Service'
-import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import { Box, Card, CardActions, CardContent, Button, Typography } from "@mui/material";
 import './ListaPostagem.css';
 import useLocalStorage from 'react-use-localstorage';
 import { useNavigate } from 'react-router-dom'
@@ -27,9 +27,9 @@ function ListaPostagem() {
       }
     })
   }
+  
 
   useEffect(() => {
-
     getPost()
 
   }, [posts.length])
@@ -56,7 +56,7 @@ function ListaPostagem() {
               </CardContent>
               <CardActions>
                 <Box display="flex" justifyContent="center" mb={1.5}>
-
+ 
                   <Link to={`/formularioPostagem/${post.id}`} className="text-decorator-none" >
                     <Box mx={1}>
                       <Button variant="contained" className="marginLeft" size='small' color="primary" >
@@ -80,5 +80,4 @@ function ListaPostagem() {
     </>
   )
 }
-
 export default ListaPostagem;

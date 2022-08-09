@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
-import { Container, Typography, TextField, Button, Select, InputLabel, MenuItem, FormControl, FormHelperText } from "@material-ui/core"
+import { Container, Typography, TextField, Button, Select, InputLabel, MenuItem, FormControl, FormHelperText } from "@mui/material";
 import './CadastroPost.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import Tema from '../../../models/Tema';
@@ -7,24 +7,15 @@ import useLocalStorage from 'react-use-localstorage';
 import Postagem from '../../../models/Postagem';
 import { busca, buscaId, post, put } from '../../../services/Service';
 
-
 function CadastroPost() {
     let navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
     const [temas, setTemas] = useState<Tema[]>([])
     const [token, setToken] = useLocalStorage('token');
-
+    
     useEffect(() => {
         if (token == "") {
-            alert("Você precisa estar logado")
-            navigate("/login")
-
-        }
-    }, [token])
-
-    useEffect(() => {
-        if (token == "") {
-            alert("Você precisa estar logado")
+            alert("navigateVocê precisa estar logado")
             navigate("/login")
 
         }
@@ -42,7 +33,7 @@ function CadastroPost() {
         tema: null
     })
 
-    useEffect(() => {
+    useEffect(() => { 
         setPostagem({
             ...postagem,
             tema: tema
@@ -50,14 +41,14 @@ function CadastroPost() {
     }, [tema])
 
     useEffect(() => {
-        getTemas()
+        getTema()
         if (id !== undefined) {
             findByIdPostagem(id)
         }
     }, [id])
 
-    async function getTemas() {
-        await busca("/tema", setTemas, {
+    async function getTema() {
+        await busca("/temas", setTemas, {
             headers: {
                 'Authorization': token
             }
@@ -105,7 +96,7 @@ function CadastroPost() {
     }
 
     function back() {
-        navigate('/posts')
+        navigate('/postagens')
     }
 
     return (
@@ -120,7 +111,7 @@ function CadastroPost() {
                     <Select
                         labelId="demo-simple-select-helper-label"
                         id="demo-simple-select-helper"
-                        onChange={(e) => buscaId(`/tema/${e.target.value}`, setTema, {
+                        onChange={(e) => buscaId(`/temas/${e.target.value}`, setTema, {
                             headers: {
                                 'Authorization': token
                             }
