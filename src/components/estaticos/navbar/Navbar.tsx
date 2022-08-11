@@ -28,9 +28,10 @@ function Navbar() {
       });
     navigate('/login')
 }
-return (
-    <>
-        <AppBar position="static" style={{ backgroundColor: "black" }}>
+
+var navbarComponent;
+    if(token != ""){
+        navbarComponent = <AppBar position="static" style={{ backgroundColor: "black" }}>
             <Toolbar variant="dense">
                 <Box className='cursor'>
                     <Typography variant="h4" color="inherit">
@@ -78,12 +79,13 @@ return (
 
             </Toolbar>
         </AppBar>
-    </>
-)
+   }
+
+   return (
+       <>
+           {navbarComponent};
+       </>
+   )
 }
 
 export default Navbar;
-
-function setToken(arg0: string) {
-    throw new Error('Function not implemented.');
-}
