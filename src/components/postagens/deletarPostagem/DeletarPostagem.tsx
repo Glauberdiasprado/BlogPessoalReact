@@ -2,20 +2,33 @@ import React, { useEffect, useState } from 'react'
 import {Typography, Button, Box, Card, CardActions, CardContent } from "@material-ui/core"
 import './DeletarPostagem.css';
 import { useNavigate, useParams } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
 import Postagem from '../../../models/Postagem';
 import { buscaId, deleteId } from '../../../services/Service';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokenReducer';
+import { toast } from 'react-toastify';
 
 function DeletarPostagem() {
-    let navigate = useNavigate();
+    let history = useNavigate();
     const { id } = useParams<{id: string}>();
-    const [token, setToken] = useLocalStorage('token');
     const [post, setPosts] = useState<Postagem>()
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+      (state) => state.tokens
+  );
 
     useEffect(() => {
         if (token == "") {
-            alert("Você precisa estar logado")
-            navigate("/login")
+          toast.error('Você precisa estar logado', {
+            position: "top-left",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: 'dark',
+            progress: undefined,
+      });
+            history("/login")
     
         }
     }, [token])
@@ -35,17 +48,26 @@ function DeletarPostagem() {
         }
 
         function sim() {
-            navigate('/postagens')
+            history('/postagens')
             deleteId(`/postagens/${id}`, {
               headers: {
                 'Authorization': token
               }
             });
-            alert('Postagem deletada com sucesso');
+            toast.success('Postagem deletada com sucesso', {
+              position: "top-left",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: 'dark',
+              progress: undefined,
+        });
           }
         
           function nao() {
-            navigate('/postagens')
+            history('/postagens')
           }
   return (
     <>

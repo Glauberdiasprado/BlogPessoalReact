@@ -1,38 +1,51 @@
-import React, {useState, useEffect} from 'react'
-import { Link } from 'react-router-dom'
-import { Box, Card, CardActions, CardContent, Button, Typography } from "@mui/material";
-import Tema from '../../../models/Tema';
-import './ListaTema.css';
-import useLocalStorage from 'react-use-localstorage';
-import {useNavigate} from 'react-router-dom';
-import { busca } from '../../../services/Service';
+import React, { useEffect, useState } from 'react'
+import { Box, Button, Card, CardActions, CardContent, Typography } from '@material-ui/core'
+import { Link, useNavigate } from 'react-router-dom'
+import Tema from '../../../models/Tema'
+import './ListaTema.css'
+import useLocalStorage from 'react-use-localstorage'
+import { busca } from '../../../services/Service'
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokenReducer';
+import { toast } from 'react-toastify'
+
 
 function ListaTema() {
   const [temas, setTemas] = useState<Tema[]>([])
-  const [token, setToken] = useLocalStorage('token');
-  let navigate = useNavigate();  //tem que ser autenticado (Token)
+  let history = useNavigate()
+  const token = useSelector<TokenState, TokenState["tokens"]>(
+    (state) => state.tokens
+);
 
   useEffect(()=>{
-    if(token == ''){
-      alert("Você precisa estar logado") 
-      navigate("/login")
+    if (token == ''){
+      toast.error('Você precisa estar logado', {
+        position: "top-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: 'dark',
+        progress: undefined
+  });
+      history("/login")
+
     }
   }, [token])
 
-
-  async function getTemas(){   //requisição dos temas pela api
-    await busca("/temas", setTemas, {
+  async function getTema(){
+    await busca("/temas", setTemas,{
       headers: {
-        'Authorization': token //propiedade que recebe o token, passa no header
+        'Authorization': token
       }
     })
   }
 
 
-  useEffect(()=>{  //chamar a função do get
-    getTemas()
+  useEffect(()=>{
+    getTema()
   }, [temas.length])
-
 
   return (
     <>
