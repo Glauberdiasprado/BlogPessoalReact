@@ -8,7 +8,7 @@ import UserLogin from '../../models/UserLogin';
 import './Login.css';
 import { logar } from '../../services/Service';
 import { useDispatch, useSelector } from 'react-redux';
-import { addtoken } from '../../store/tokens/actions';
+import { addToken } from '../../store/tokens/actions';
 import { toast } from 'react-toastify';
 
 function Login() {
@@ -34,7 +34,7 @@ function Login() {
 
     useEffect(() => {
         if (token !== '') {
-            dispatch(addtoken(token));
+            dispatch(addToken(token));
             history('/home')
         }
     }, [token])

@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokenReducer';
-import { addtoken } from '../../../store/tokens/actions';
+import { addToken } from '../../../store/tokens/actions';
 import { toast } from 'react-toastify';
 
 function Navbar() {
@@ -15,7 +15,7 @@ function Navbar() {
     const dispatch = useDispatch();
 
     function goLogout() {
-        dispatch(addtoken(''));
+        dispatch(addToken(''));
         toast.success('Usuario deslogado!', {
             position: "top-left",
             autoClose: 2000,
