@@ -33,7 +33,7 @@ function Login() {
     }
 
     useEffect(() => {
-        if (token != '') {
+        if (token !== '') {
             dispatch(addtoken(token));
             history('/home')
         }

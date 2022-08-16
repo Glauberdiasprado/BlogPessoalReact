@@ -3,7 +3,6 @@ import { Box, Button, Card, CardActions, CardContent, Typography } from '@materi
 import { Link, useNavigate } from 'react-router-dom'
 import Tema from '../../../models/Tema'
 import './ListaTema.css'
-import useLocalStorage from 'react-use-localstorage'
 import { busca } from '../../../services/Service'
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokenReducer';
