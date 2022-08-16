@@ -6,7 +6,7 @@ import { Grid, Box, Typography } from '@mui/material';
 import './Footer.css';
 import { useSelector } from 'react-redux';
 import { TokenState }  from '../../../store/tokens/tokenReducer';
-import { addtoken } from '../../../store/tokens/actions';
+import { addToken } from '../../../store/tokens/actions';
 
 function Footer() {
 
