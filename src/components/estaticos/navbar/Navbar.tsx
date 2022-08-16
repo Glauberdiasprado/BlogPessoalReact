@@ -31,57 +31,55 @@ function Navbar() {
 
 var navbarComponent;
     if(token != ""){
-
         navbarComponent = <AppBar position="static" style={{ backgroundColor: "black" }}>
-            <Toolbar variant="dense">
-                <Box className='cursor'>
-                    <Typography variant="h4" color="inherit">
-                        BlogPessoal
+        <Toolbar variant="dense">
+            <Box className='cursor'>
+                <Typography variant="h4" color="inherit">
+                    BlogPessoal
+                </Typography>
+            </Box>
+
+            <Box display="flex" justifyContent="start">
+                <Link to='/home' className='text-decorator-none'>
+                    <Box mx={1} className='cursor'>
+                        <Typography variant="h6" color="inherit">
+                            home
+                        </Typography>
+                    </Box>
+                </Link>
+
+                <Link to='/postagens' className='text-decorator-none'>
+                    <Box mx={1} className='cursor'>
+                        <Typography variant="h6" color="inherit">
+                            postagens
+                        </Typography>
+                    </Box>
+                </Link>
+                <Link to='/temas' className='text-decorator-none'>
+                    <Box mx={1} className='cursor'>
+                        <Typography variant="h6" color="inherit">
+                            temas
+                        </Typography>
+                    </Box>
+                </Link>
+                <Link to='/formularioTema' className='text-decorator-none'>
+                    <Box mx={1} className='cursor'>
+                        <Typography variant="h6" color="inherit">
+                            cadastrar tema
+                        </Typography>
+                    </Box>
+                </Link>
+                <Box mx={1} className='cursor text-decorator-none' onClick={goLogout}>
+                    <Typography variant="h6" color="inherit">
+                        logout
                     </Typography>
                 </Box>
 
-                <Box display="flex" justifyContent="start">
-                    <Link to='/home' className='text-decorator-none'>
-                        <Box mx={1} className='cursor'>
-                            <Typography variant="h6" color="inherit">
-                                home
-                            </Typography>
-                        </Box>
-                    </Link>
+            </Box>
 
-                    <Link to='/postagens' className='text-decorator-none'>
-                        <Box mx={1} className='cursor'>
-                            <Typography variant="h6" color="inherit">
-                                postagens
-                            </Typography>
-                        </Box>
-                    </Link>
-                    <Link to='/temas' className='text-decorator-none'>
-                        <Box mx={1} className='cursor'>
-                            <Typography variant="h6" color="inherit">
-                                temas
-                            </Typography>
-                        </Box>
-                    </Link>
-                    <Link to='/formularioTema' className='text-decorator-none'>
-                        <Box mx={1} className='cursor'>
-                            <Typography variant="h6" color="inherit">
-                                cadastrar tema
-                            </Typography>
-                        </Box>
-                    </Link>
-                    <Box mx={1} className='cursor' onClick={goLogout}>
-                        <Typography variant="h6" color="inherit">
-                            logout
-                        </Typography>
-                    </Box>
-
-                </Box>
-
-            </Toolbar>
-        </AppBar>
-   }
-
+        </Toolbar>
+    </AppBar>
+    }
    return (
        <>
            {navbarComponent};
